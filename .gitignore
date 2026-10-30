@@ -1,0 +1,55 @@
+# ============================================================
+# .gitignore — SocialSync AI
+# Prevents sensitive files and generated artifacts from
+# being committed to the repository.
+# ============================================================
+
+# ── Dependencies — never commit these ──
+node_modules/
+**/node_modules/
+
+# ── Environment variables — contains secrets ──
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+**/.env
+**/.env.*
+!**/.env.example
+
+# ── Build outputs ──
+dist/
+build/
+**/dist/
+**/build/
+
+# ── Logs ──
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── OS files ──
+.DS_Store
+Thumbs.db
+._*
+
+# ── Editor files ──
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Testing coverage ──
+coverage/
+.nyc_output/
+
+# ── Misc ──
+*.pem
+.vercel
+.render
