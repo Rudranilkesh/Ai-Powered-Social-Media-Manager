@@ -1,70 +1,90 @@
 # SocialSync AI — Design System
 
-> Source of truth: `frontend/tailwind.config.js` and `frontend/src/index.css`
+> **Reference:** [design.md](../../design.md) (Product UI/UX Design System & Developer Implementation Guide)  
+> **Source of truth:** `frontend/tailwind.config.js` and `frontend/src/index.css`
 
 ---
 
-## Color Palette
+## 1. Design Intent & Aesthetic
 
-### Brand Colors (Primary)
-| Token | Hex | Use |
-|---|---|---|
-| `primary-50` | `#eef2ff` | Light backgrounds |
-| `primary-100` | `#e0e7ff` | Hover states |
-| `primary-400` | `#818cf8` | Headings, accents |
-| `primary-500` | `#6366f1` | Default brand |
-| `primary-600` | `#4f46e5` | Buttons |
-| `primary-700` | `#4338ca` | Button hover |
-| `primary-900` | `#312e81` | Dark accents |
-
-### Surface Colors (Background)
-| Token | Hex | Use |
-|---|---|---|
-| `surface` | `#0f172a` | Main dark background |
-| `surface-card` | `#1e293b` | Cards and panels |
-| `surface-border` | `#334155` | Borders and dividers |
+SocialSync AI uses a warm, accessible, editorial SaaS aesthetic:
+- **Canvas:** Warm cream background (`#f8f5f1`)
+- **Surfaces:** Crisp white cards (`#ffffff`) with soft blush highlights (`#fff1f1`)
+- **Brand Primary:** Deep wine burgundy (`#7a2e2a` / hover `#61231f`)
+- **Typography:** IBM Plex Sans across all interfaces
 
 ---
 
-## Typography
+## 2. Semantic Color Tokens
 
-**Font:** Inter (Google Fonts)
-**Weights:** 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+| Semantic Token | Tailwind Class | Hex Value | Role & Usage |
+|---|---|---|---|
+| `--color-canvas` | `bg-canvas` | `#f8f5f1` | Outer page & app background |
+| `--color-surface` | `bg-surface` | `#ffffff` | Cards, panels, modal dialogs, drawers |
+| `--color-surface-soft` | `bg-surface-soft` | `#fff1f1` | Selected navigation highlight, featured badges |
+| `--color-text` | `text-ink` | `#3b1f1d` | Headings, primary body typography |
+| `--color-text-muted` | `text-ink-muted` | `#674c49` | Subtitles, secondary labels, metadata |
+| `--color-brand` | `bg-brand`, `text-brand` | `#7a2e2a` | Primary buttons, active nav indicators |
+| `--color-brand-hover` | `hover:bg-brand-hover` | `#61231f` | Hover state for primary buttons |
+| `--color-border` | `border-line` | `#e8dcda` | Card borders, dividers, subtle outlines |
+| `--color-positive` | `text-positive` | `#176534` | Success status, published badges |
+| `--color-caution` | `text-caution` | `#805000` | Scheduled / pending status badges |
+| `--color-negative` | `text-negative` | `#a02525` | Form errors, failed attempts |
 
 ---
 
-## Reusable CSS Classes
+## 3. Typography
+
+- **Primary Font:** `IBM Plex Sans` (Google Fonts), system-ui sans-serif fallback
+- **Hierarchy:**
+  - `h1`: Page headings (`24–32px`, font-bold, `text-ink`)
+  - `h2`: Section headings (`18–20px`, font-bold, `text-ink`)
+  - `h3`: Card titles (`14–16px`, font-semibold, `text-ink`)
+  - Body: `14–16px`, line-height `1.55`, `text-ink`
+  - Captions / Meta: `11–12px`, `text-ink-muted`
+
+---
+
+## 4. Reusable Component Classes
 
 Defined in `frontend/src/index.css`:
 
 ### Buttons
 ```html
-<!-- Primary button -->
-<button class="btn-primary">Save Post</button>
+<!-- Primary Brand Button -->
+<button class="btn-primary">Create Post</button>
 
-<!-- Secondary button -->
-<button class="btn-secondary">Cancel</button>
+<!-- Secondary Button -->
+<button class="btn-secondary">Drafts</button>
+
+<!-- Ghost Button -->
+<button class="btn-ghost">Options</button>
 ```
 
-### Card
+### Cards
 ```html
-<div class="card">Card content here</div>
+<div class="card">
+  <!-- 16px radius, white surface, subtle border and warm shadow -->
+</div>
 ```
 
-### Input
+### Form Inputs
 ```html
-<input class="input" placeholder="Enter caption..." />
+<input class="input" placeholder="What would you like to post about?" />
 ```
+
+### Badges
+```html
+<span class="badge bg-surface-soft text-brand font-semibold">Active</span>
+```
+
+### Micro-Interactions & Special Components
+- **Ambient Spotlight:** Soft cursor-following torch (`AmbientSpotlight.jsx`)
+- **Command Palette:** Global keyboard modal triggerable with `Ctrl+K` (`CommandPalette.jsx`)
+- **Dual Infinite Marquees:** Hardware-accelerated continuous right-to-left tickers with hover-to-pause
+- **Live Device Simulation:** Multi-platform mobile mockup with interactive reactions (`LivePostPreviewer.jsx`)
+- **Invisible Scrollbars:** Clean viewport aesthetics with mousewheel/touch scroll preserved
 
 ---
 
-## Tailwind Usage Rules
-
-- Use Tailwind utility classes directly in JSX
-- Use `btn-primary`, `card`, `input` for repeating patterns
-- Dark theme by default — `bg-surface`, `text-white`
-- No separate CSS files per component
-
----
-
-*Update this file when new components or design tokens are added.*
+*Synchronized with design.md and implemented in Task T05.*

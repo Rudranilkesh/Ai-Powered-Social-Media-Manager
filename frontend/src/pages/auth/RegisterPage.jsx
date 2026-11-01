@@ -1,7 +1,10 @@
 // ============================================================
 // pages/auth/RegisterPage.jsx — User Registration Page
-// Allows new users to create an account with default "creator" role.
-// Validates name, email, password rules, and password confirmation.
+// Styled per design.md (SocialSync AI Design System):
+// - Cream canvas background (#f8f5f1)
+// - Centered crisp white card container (max-w-[440px])
+// - Deep wine brand button (#7a2e2a)
+// - Real-time password criteria checklist
 // ============================================================
 
 import React, { useState } from "react";
@@ -24,7 +27,6 @@ export function RegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // ── Input change handler ──
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -37,14 +39,12 @@ export function RegisterPage() {
     }
   };
 
-  // ── Password requirement checks ──
   const passwordCriteria = {
     minLength: formData.password.length >= 8,
     hasUpper: /[A-Z]/.test(formData.password),
     hasNumber: /[0-9]/.test(formData.password),
   };
 
-  // ── Client-side validation matching backend rules ──
   const validateForm = () => {
     const newErrors = {};
 
@@ -57,7 +57,7 @@ export function RegisterPage() {
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "Please provide a valid email address";
     }
 
     if (!formData.password) {
@@ -82,31 +82,26 @@ export function RegisterPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ── Form submission handler ──
   const handleSubmit = async (e) => {
     e.preventDefault();
     setServerError("");
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
 
     try {
       await register(formData.name.trim(), formData.email.trim(), formData.password);
-      // Successful registration signs user in and issues JWT
       navigate("/dashboard", { replace: true });
     } catch (err) {
-      const apiMessage =
+      const message =
         err.response?.data?.message || err.message || "Registration failed. Please try again.";
-      setServerError(apiMessage);
+      setServerError(message);
 
-      // Handle validation error array from express-validator
       if (err.response?.data?.errors && Array.isArray(err.response.data.errors)) {
         const fieldErrors = {};
-        err.response.data.errors.forEach((e) => {
-          if (e.field) fieldErrors[e.field] = e.message;
+        err.response.data.errors.forEach((item) => {
+          if (item.field) fieldErrors[item.field] = item.message;
         });
         setErrors((prev) => ({ ...prev, ...fieldErrors }));
       }
@@ -116,35 +111,37 @@ export function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-md">
+    <main className="min-h-screen bg-canvas text-ink flex flex-col items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-[440px]">
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-3 group">
-            <span className="text-2xl font-extrabold text-primary-400 group-hover:text-primary-300 transition-colors">
+            <span className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              S
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-ink group-hover:text-brand transition-colors">
               SocialSync AI
             </span>
-            <span className="text-xl">🚀</span>
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h1 className="text-2xl font-bold text-ink">
             Create your account
           </h1>
-          <p className="text-slate-400 text-sm mt-1.5">
+          <p className="text-ink-muted text-sm mt-1">
             Start automating your social media with AI
           </p>
         </div>
 
-        {/* Form Card */}
-        <div className="card shadow-2xl">
-          {/* Server Error Alert Banner */}
+        {/* Register Card */}
+        <div className="card shadow-elevated">
+          {/* Server Error Alert */}
           {serverError && (
             <div
               role="alert"
               aria-live="assertive"
-              className="mb-6 p-4 rounded-lg bg-red-950/50 border border-red-500/50 text-red-200 text-sm flex items-start gap-3"
+              className="mb-5 p-3.5 rounded-control bg-negative-soft border border-negative-border text-negative text-sm flex items-start gap-2.5"
             >
               <svg
-                className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 flex-shrink-0 mt-0.5 text-negative"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -165,7 +162,7 @@ export function RegisterPage() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-slate-200 mb-1.5"
+                className="block text-sm font-medium text-ink mb-1.5"
               >
                 Full name
               </label>
@@ -180,12 +177,12 @@ export function RegisterPage() {
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? "name-error" : undefined}
                 className={`input ${
-                  errors.name ? "border-red-500 focus:ring-red-500" : ""
+                  errors.name ? "border-negative focus:ring-negative" : ""
                 }`}
                 disabled={isSubmitting}
               />
               {errors.name && (
-                <p id="name-error" className="text-xs text-red-400 mt-1">
+                <p id="name-error" className="text-xs text-negative mt-1 font-medium">
                   {errors.name}
                 </p>
               )}
@@ -195,7 +192,7 @@ export function RegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-slate-200 mb-1.5"
+                className="block text-sm font-medium text-ink mb-1.5"
               >
                 Email address
               </label>
@@ -210,12 +207,12 @@ export function RegisterPage() {
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "email-error" : undefined}
                 className={`input ${
-                  errors.email ? "border-red-500 focus:ring-red-500" : ""
+                  errors.email ? "border-negative focus:ring-negative" : ""
                 }`}
                 disabled={isSubmitting}
               />
               {errors.email && (
-                <p id="email-error" className="text-xs text-red-400 mt-1">
+                <p id="email-error" className="text-xs text-negative mt-1 font-medium">
                   {errors.email}
                 </p>
               )}
@@ -225,7 +222,7 @@ export function RegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-slate-200 mb-1.5"
+                className="block text-sm font-medium text-ink mb-1.5"
               >
                 Password
               </label>
@@ -241,14 +238,14 @@ export function RegisterPage() {
                   aria-invalid={Boolean(errors.password)}
                   aria-describedby="password-rules"
                   className={`input pr-11 ${
-                    errors.password ? "border-red-500 focus:ring-red-500" : ""
+                    errors.password ? "border-negative focus:ring-negative" : ""
                   }`}
                   disabled={isSubmitting}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-subtle hover:text-ink transition-colors p-1"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
@@ -279,14 +276,14 @@ export function RegisterPage() {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-red-400 mt-1">{errors.password}</p>
+                <p className="text-xs text-negative mt-1 font-medium">{errors.password}</p>
               )}
 
               {/* Password Requirement Checklist */}
-              <div id="password-rules" className="mt-2 text-xs text-slate-400 space-y-1 pl-1">
+              <div id="password-rules" className="mt-2 text-xs text-ink-muted space-y-1 pl-0.5">
                 <div
                   className={`flex items-center gap-1.5 ${
-                    passwordCriteria.minLength ? "text-green-400" : "text-slate-500"
+                    passwordCriteria.minLength ? "text-positive font-medium" : "text-ink-subtle"
                   }`}
                 >
                   <span>{passwordCriteria.minLength ? "✓" : "○"}</span>
@@ -294,7 +291,7 @@ export function RegisterPage() {
                 </div>
                 <div
                   className={`flex items-center gap-1.5 ${
-                    passwordCriteria.hasUpper ? "text-green-400" : "text-slate-500"
+                    passwordCriteria.hasUpper ? "text-positive font-medium" : "text-ink-subtle"
                   }`}
                 >
                   <span>{passwordCriteria.hasUpper ? "✓" : "○"}</span>
@@ -302,7 +299,7 @@ export function RegisterPage() {
                 </div>
                 <div
                   className={`flex items-center gap-1.5 ${
-                    passwordCriteria.hasNumber ? "text-green-400" : "text-slate-500"
+                    passwordCriteria.hasNumber ? "text-positive font-medium" : "text-ink-subtle"
                   }`}
                 >
                   <span>{passwordCriteria.hasNumber ? "✓" : "○"}</span>
@@ -315,7 +312,7 @@ export function RegisterPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-slate-200 mb-1.5"
+                className="block text-sm font-medium text-ink mb-1.5"
               >
                 Confirm password
               </label>
@@ -330,12 +327,12 @@ export function RegisterPage() {
                 aria-invalid={Boolean(errors.confirmPassword)}
                 aria-describedby={errors.confirmPassword ? "confirm-error" : undefined}
                 className={`input ${
-                  errors.confirmPassword ? "border-red-500 focus:ring-red-500" : ""
+                  errors.confirmPassword ? "border-negative focus:ring-negative" : ""
                 }`}
                 disabled={isSubmitting}
               />
               {errors.confirmPassword && (
-                <p id="confirm-error" className="text-xs text-red-400 mt-1">
+                <p id="confirm-error" className="text-xs text-negative mt-1 font-medium">
                   {errors.confirmPassword}
                 </p>
               )}
@@ -345,7 +342,7 @@ export function RegisterPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary w-full flex items-center justify-center gap-2 mt-6 py-3 font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+              className="btn-primary w-full py-3 mt-2 text-base font-medium shadow-sm"
             >
               {isSubmitting ? (
                 <>
@@ -359,11 +356,11 @@ export function RegisterPage() {
           </form>
 
           {/* Card Footer */}
-          <div className="mt-6 pt-5 border-t border-surface-border text-center text-sm text-slate-400">
+          <div className="mt-6 pt-5 border-t border-line text-center text-sm text-ink-muted">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-primary-400 hover:text-primary-300 font-medium transition-colors"
+              className="text-brand hover:text-brand-hover font-semibold transition-colors underline-offset-2 hover:underline"
             >
               Log in
             </Link>
@@ -375,4 +372,3 @@ export function RegisterPage() {
 }
 
 export default RegisterPage;
-

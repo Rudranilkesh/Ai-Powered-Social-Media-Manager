@@ -1,7 +1,10 @@
 // ============================================================
 // pages/auth/LoginPage.jsx — User Login Page
-// Allows creators and administrators to authenticate with email & password.
-// Performs client-side validation and displays server-side error messages.
+// Styled per design.md (SocialSync AI Design System):
+// - Cream canvas background (#f8f5f1)
+// - Centered crisp white card container (max-w-[420px])
+// - Deep wine brand button (#7a2e2a)
+// - Accessible field validation & error alerts
 // ============================================================
 
 import React, { useState } from "react";
@@ -23,11 +26,9 @@ export function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // ── Input change handler ──
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear field-specific validation error on change
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -36,14 +37,13 @@ export function LoginPage() {
     }
   };
 
-  // ── Client-side validation ──
   const validateForm = () => {
     const newErrors = {};
 
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "Please provide a valid email address";
     }
 
     if (!formData.password) {
@@ -54,32 +54,27 @@ export function LoginPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ── Form submission handler ──
   const handleSubmit = async (e) => {
     e.preventDefault();
     setServerError("");
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
 
     try {
       await login(formData.email.trim(), formData.password);
-      // Redirect to target path or dashboard
-      const from = location.state?.from?.pathname || "/dashboard";
-      navigate(from, { replace: true });
+      const destination = location.state?.from?.pathname || "/dashboard";
+      navigate(destination, { replace: true });
     } catch (err) {
-      const apiMessage =
-        err.response?.data?.message || err.message || "Failed to log in. Please try again.";
-      setServerError(apiMessage);
+      const message =
+        err.response?.data?.message || err.message || "Invalid credentials. Please try again.";
+      setServerError(message);
 
-      // If backend validation returned specific field errors
       if (err.response?.data?.errors && Array.isArray(err.response.data.errors)) {
         const fieldErrors = {};
-        err.response.data.errors.forEach((e) => {
-          if (e.field) fieldErrors[e.field] = e.message;
+        err.response.data.errors.forEach((item) => {
+          if (item.field) fieldErrors[item.field] = item.message;
         });
         setErrors((prev) => ({ ...prev, ...fieldErrors }));
       }
@@ -89,35 +84,37 @@ export function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-md">
+    <main className="min-h-screen bg-canvas text-ink flex flex-col items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-[420px]">
         {/* Brand Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-3 group">
-            <span className="text-2xl font-extrabold text-primary-400 group-hover:text-primary-300 transition-colors">
+            <span className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              S
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-ink group-hover:text-brand transition-colors">
               SocialSync AI
             </span>
-            <span className="text-xl">🚀</span>
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h1 className="text-2xl font-bold text-ink">
             Welcome back
           </h1>
-          <p className="text-slate-400 text-sm mt-1.5">
-            Log in to manage and automate your social media
+          <p className="text-ink-muted text-sm mt-1">
+            Log in to manage and automate your social channels
           </p>
         </div>
 
-        {/* Form Card */}
-        <div className="card shadow-2xl">
-          {/* Server Error Alert Banner */}
+        {/* Login Card */}
+        <div className="card shadow-elevated">
+          {/* Server Error Alert */}
           {serverError && (
             <div
               role="alert"
               aria-live="assertive"
-              className="mb-6 p-4 rounded-lg bg-red-950/50 border border-red-500/50 text-red-200 text-sm flex items-start gap-3"
+              className="mb-5 p-3.5 rounded-control bg-negative-soft border border-negative-border text-negative text-sm flex items-start gap-2.5"
             >
               <svg
-                className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 flex-shrink-0 mt-0.5 text-negative"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -133,12 +130,12 @@ export function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+          <form onSubmit={handleSubmit} noValidate className="space-y-4">
             {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-slate-200 mb-1.5"
+                className="block text-sm font-medium text-ink mb-1.5"
               >
                 Email address
               </label>
@@ -153,12 +150,12 @@ export function LoginPage() {
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "email-error" : undefined}
                 className={`input ${
-                  errors.email ? "border-red-500 focus:ring-red-500" : ""
+                  errors.email ? "border-negative focus:ring-negative" : ""
                 }`}
                 disabled={isSubmitting}
               />
               {errors.email && (
-                <p id="email-error" className="text-xs text-red-400 mt-1.5">
+                <p id="email-error" className="text-xs text-negative mt-1.5 font-medium">
                   {errors.email}
                 </p>
               )}
@@ -169,7 +166,7 @@ export function LoginPage() {
               <div className="flex items-center justify-between mb-1.5">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-slate-200"
+                  className="block text-sm font-medium text-ink"
                 >
                   Password
                 </label>
@@ -186,16 +183,15 @@ export function LoginPage() {
                   aria-invalid={Boolean(errors.password)}
                   aria-describedby={errors.password ? "password-error" : undefined}
                   className={`input pr-11 ${
-                    errors.password ? "border-red-500 focus:ring-red-500" : ""
+                    errors.password ? "border-negative focus:ring-negative" : ""
                   }`}
                   disabled={isSubmitting}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-subtle hover:text-ink transition-colors p-1"
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  tabIndex={0}
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,7 +221,7 @@ export function LoginPage() {
                 </button>
               </div>
               {errors.password && (
-                <p id="password-error" className="text-xs text-red-400 mt-1.5">
+                <p id="password-error" className="text-xs text-negative mt-1.5 font-medium">
                   {errors.password}
                 </p>
               )}
@@ -235,25 +231,25 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary w-full flex items-center justify-center gap-2 mt-6 py-3 font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+              className="btn-primary w-full py-3 mt-2 text-base font-medium shadow-sm"
             >
               {isSubmitting ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Signing in...</span>
+                  <span>Logging in...</span>
                 </>
               ) : (
-                <span>Sign in</span>
+                <span>Log in</span>
               )}
             </button>
           </form>
 
           {/* Card Footer */}
-          <div className="mt-6 pt-5 border-t border-surface-border text-center text-sm text-slate-400">
+          <div className="mt-6 pt-5 border-t border-line text-center text-sm text-ink-muted">
             Don&apos;t have an account?{" "}
             <Link
               to="/register"
-              className="text-primary-400 hover:text-primary-300 font-medium transition-colors"
+              className="text-brand hover:text-brand-hover font-semibold transition-colors underline-offset-2 hover:underline"
             >
               Create account
             </Link>
@@ -265,4 +261,3 @@ export function LoginPage() {
 }
 
 export default LoginPage;
-

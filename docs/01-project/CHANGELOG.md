@@ -5,6 +5,36 @@ Format: `[version] — date — description`
 
 ---
 
+## [0.5.0] — 2026-11-01 — Dashboard Layout & Design System (Task T05)
+
+### Added
+- `frontend/src/components/layout/Sidebar.jsx` — Desktop permanent sidebar (260px) and mobile drawer with brand header, workspace navigation (`Dashboard`, `AI Studio`, `Posts`, `Calendar`, `Accounts`, `Analytics`), active route indicator with blush highlight (`#fff1f1`), and user profile/logout footer.
+- `frontend/src/components/layout/TopBar.jsx` — Responsive top bar with mobile menu trigger, workspace breadcrumb, quick `+ Create Post` primary action, and active status indicator.
+- `frontend/src/components/layout/AppLayout.jsx` — Main authenticated layout integrating sidebar, top bar, accessible mobile drawer with backdrop blur, and scrollable content area.
+- `frontend/src/pages/dashboard/DashboardPage.jsx` — Main creator dashboard implemented per `design.md` Section 4.7:
+  - Dynamic time-based greeting ("Good morning / afternoon / evening") with creator name.
+  - Quick action buttons (Create Post, AI Studio).
+  - 4 KPI metric cards (Total Posts, Scheduled, Published, AI Generations).
+  - Upcoming scheduled posts feed with accessible empty state and calendar link.
+  - Connected accounts summary with multi-platform readiness indicators.
+  - Workspace Quick Start onboarding guide.
+- `frontend/src/components/common/AmbientSpotlight.jsx` — Smooth radial cursor torch tracking mouse coordinates across the app with warm wine & amber depth.
+- `frontend/src/components/common/AnimatedCounter.jsx` — Rolling numbers component with ease-out cubic interpolation for dynamic KPI metric rollups.
+- `frontend/src/components/common/CommandPalette.jsx` — Spotlight command palette with global `Ctrl+K` / `Cmd+K` keyboard shortcut, fuzzy action search, and keyboard arrow navigation.
+- `frontend/src/components/common/LivePostPreviewer.jsx` — Interactive smartphone mockup widget simulating real-time rendering across Instagram, LinkedIn, Twitter/X, and Facebook with interactive like counter.
+- `frontend/src/components/common/ConfettiCanvas.jsx` — Native HTML5 Canvas confetti engine firing celebratory brand particle bursts upon completing onboarding checklist items.
+- Added route placeholders in `App.jsx` for `/ai`, `/posts`, `/calendar`, `/accounts`, `/analytics`, and `/settings`.
+
+### Changed
+- Aligned UI design system with `design.md`:
+  - `frontend/index.html` — Configured Google Font `IBM Plex Sans`.
+  - `frontend/tailwind.config.js` — Implemented semantic tokens (`canvas: #f8f5f1`, `surface: #ffffff`, `surface.soft: #fff1f1`, `ink: #3b1f1d`, `brand: #7a2e2a`, `line: #e8dcda`).
+  - `frontend/src/index.css` — Configured global base styles, button classes (`btn-primary`, `btn-secondary`, `btn-ghost`), `card`, `input`, and accessible focus indicators.
+  - `LoginPage.jsx` & `RegisterPage.jsx` — Updated to warm cream canvas with white card and wine brand styling.
+  - `docs/04-design/DESIGN_SYSTEM.md` — Synchronized with `design.md`.
+
+---
+
 ## [0.4.0] — 2026-11-01 — Authentication Frontend (Task T04)
 
 ### Added

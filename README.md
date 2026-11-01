@@ -157,8 +157,8 @@ VITE_API_BASE_URL=/api/v1
 | T02 | MongoDB Models | ✅ Complete |
 | T03 | Authentication backend | ✅ Complete |
 | T04 | Authentication frontend | ✅ Complete |
-| T05 | Dashboard UI | 🔄 Next |
-| T06 | Media upload (Cloudinary) | ⬜ Pending |
+| T05 | Dashboard UI | ✅ Complete |
+| T06 | Media upload (Cloudinary) | 🔄 Next |
 | T07 | AI content generation | ⬜ Pending |
 | T08 | AI generator UI | ⬜ Pending |
 | T09 | Post management | ⬜ Pending |

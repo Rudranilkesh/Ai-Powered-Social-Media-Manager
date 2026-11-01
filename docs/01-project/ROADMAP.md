@@ -2,7 +2,7 @@
 
 ---
 
-## Current Status: Tasks 1-4 Complete ✅ (Week 1 Milestones Achieved)
+## Current Status: Tasks 1-5 Complete ✅ (Week 1 & 2 Dashboard Milestones Achieved)
 
 ---
 
@@ -19,8 +19,8 @@
 ### Week 2 — Dashboard + AI
 | Task | Description | Owner | Status |
 |---|---|---|---|
-| Task 5 | Dashboard layout and navigation | Rudranil | 🔄 Next |
-| Task 6 | Cloudinary media upload | Rudranil | ⬜ Pending |
+| Task 5 | Dashboard layout and navigation | Rudranil | ✅ Complete |
+| Task 6 | Cloudinary media upload | Rudranil | 🔄 Next |
 | Task 7 | AI content generation backend (Gemini API) | Rudranil | ⬜ Pending |
 | Task 8 | AI content generator UI | Rudranil | ⬜ Pending |
 

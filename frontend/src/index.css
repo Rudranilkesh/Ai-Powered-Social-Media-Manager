@@ -1,64 +1,177 @@
 /* ============================================================
-   index.css — Global stylesheet
-   Tailwind's three required directives inject the base reset,
-   component utilities, and all generated utility classes.
-   Any custom global styles go below the directives.
+   index.css — Global Stylesheet
+   Configured according to design.md (SocialSync AI Design System)
+   - Warm cream canvas background (#f8f5f1)
+   - Warm ink typography (#3b1f1d)
+   - Deep wine brand accents (#7a2e2a)
+   - IBM Plex Sans font family
+   - High-energy micro-interactions, scale transforms & wine glow
    ============================================================ */
 
-/* Tailwind base reset and default styles */
 @tailwind base;
-
-/* Tailwind component classes */
 @tailwind components;
-
-/* Tailwind utility classes */
 @tailwind utilities;
 
-/* ── Custom global styles ── */
 @layer base {
-  /* Apply Inter font and dark background to entire app */
-  body {
-    @apply bg-surface text-white font-sans;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  html {
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  /* Remove default list styles */
+  body {
+    @apply bg-canvas text-ink font-sans antialiased selection:bg-brand/10 selection:text-brand;
+    min-height: 100vh;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Universal scrollbar removal across WebKit, Gecko, and Blink engines */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Accessible focus indicators per design.md section 2.5 & 6 */
+  :focus-visible {
+    outline: 2px solid #7a2e2a;
+    outline-offset: 2px;
+  }
+
   ul, ol {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
 }
 
 @layer components {
-  /* ── Reusable button base ── */
+  /* ── Primary Brand Button (Wine #7a2e2a) with prominent scale & glow ── */
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold
-           px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer;
+    @apply bg-brand hover:bg-brand-hover active:bg-brand-active text-white font-medium
+           px-5 py-2.5 rounded-control transition-all duration-200 ease-out
+           inline-flex items-center justify-center gap-2 shadow-sm
+           hover:scale-[1.04] hover:shadow-glow active:scale-[0.96]
+           disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
   }
 
+  /* ── Secondary Button with hover lift, scale & border highlight ── */
   .btn-secondary {
-    @apply bg-surface-card hover:bg-surface-border text-white font-semibold
-           px-5 py-2.5 rounded-lg border border-surface-border
-           transition-colors duration-200 cursor-pointer;
+    @apply bg-surface hover:bg-surface-soft text-ink font-medium
+           px-5 py-2.5 rounded-control border border-line
+           transition-all duration-200 ease-out inline-flex items-center justify-center gap-2 shadow-card
+           hover:scale-[1.03] hover:shadow-elevated hover:border-brand/40 active:scale-[0.96]
+           disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
   }
 
-  /* ── Reusable card container ── */
+  /* ── Ghost Button ── */
+  .btn-ghost {
+    @apply hover:bg-surface-soft text-ink font-medium
+           px-4 py-2 rounded-control transition-all duration-200
+           inline-flex items-center justify-center gap-2 cursor-pointer
+           hover:scale-[1.04] active:scale-[0.96];
+  }
+
+  /* ── Standard Card Surface (16px radius + shadow-card) ── */
   .card {
-    @apply bg-surface-card border border-surface-border rounded-2xl p-6;
+    @apply bg-surface border border-line rounded-card p-6 shadow-card
+           transition-all duration-200;
   }
 
-  /* ── Form input base ── */
+  /* ── Interactive Premium Card with prominent hover lift, scale & wine glow ── */
+  .card-interactive {
+    @apply bg-surface border border-line rounded-card p-6 shadow-card
+           transition-all duration-300 ease-out
+           hover:-translate-y-2 hover:scale-[1.02] hover:shadow-elevated hover:border-brand/45 hover:bg-white;
+  }
+
+  /* ── Text Input / Form Control with hover & focus scale ── */
   .input {
-    @apply w-full bg-surface border border-surface-border text-white
-           rounded-lg px-4 py-2.5 placeholder-slate-500
-           focus:outline-none focus:ring-2 focus:ring-primary-500
-           transition duration-200;
+    @apply w-full bg-surface border border-line text-ink rounded-control
+           px-4 py-2.5 placeholder-ink-subtle
+           hover:border-brand/40 focus:border-brand focus:ring-2 focus:ring-brand
+           focus:scale-[1.01] focus:shadow-glow-sm
+           transition-all duration-200 text-sm shadow-sm;
+  }
+
+  /* ── Status Badge with hover scale ── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+           transition-all duration-200 hover:scale-105;
+  }
+
+  /* ── Glassmorphic TopBar ── */
+  .glass-nav {
+    @apply backdrop-blur-md bg-surface/90 border-b border-line/80;
+  }
+
+  /* ── Horizontal Scroll Container (hide scrollbar but keep scrollable) ── */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ── Skeleton Loading Wave Effect ── */
+  .skeleton {
+    @apply relative overflow-hidden bg-line/50 rounded-control;
+  }
+  .skeleton::after {
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    content: '';
+    animation: shimmer 1.8s infinite;
   }
 }
+
+/* ── Hardware-Accelerated Continuous Marquee Tickers (Right to Left) ── */
+@keyframes continuousMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker-marquee {
+  display: flex !important;
+  width: max-content !important;
+  animation: continuousMarquee 26s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-ticker-marquee:hover {
+  animation-play-state: paused !important;
+}
+
+.animate-cards-marquee {
+  display: flex !important;
+  width: max-content !important;
+  animation: continuousMarquee 38s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-cards-marquee:hover {
+  animation-play-state: paused !important;
+}
+

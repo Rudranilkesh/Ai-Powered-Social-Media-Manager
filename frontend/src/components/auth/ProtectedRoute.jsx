@@ -1,28 +1,20 @@
 // ============================================================
 // components/auth/ProtectedRoute.jsx — Protected Route Guard
 // Ensures only authenticated users can access the route.
-// Unauthenticated users are redirected to /login with return state.
+// Displays the creative branded pre-loader while resolving session.
 // ============================================================
 
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { LoadingPreloader } from "../common/LoadingPreloader.jsx";
 
 export function ProtectedRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
-    return (
-      <div
-        role="status"
-        aria-live="polite"
-        className="min-h-screen bg-surface flex flex-col items-center justify-center gap-4 text-white"
-      >
-        <div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-slate-400 text-sm">Verifying authentication...</p>
-      </div>
-    );
+    return <LoadingPreloader message="Verifying authentication session..." />;
   }
 
   if (!isAuthenticated) {
@@ -33,4 +25,3 @@ export function ProtectedRoute({ children }) {
 }
 
 export default ProtectedRoute;
-
