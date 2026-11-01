@@ -15,7 +15,7 @@
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
 | T01 | Project setup, folder structure, boilerplate | Ritam | ✅ Complete | npm install done, GitHub pushed |
-| T02 | MongoDB Models (8 schemas) | Ritam | ⬜ Pending | Next task |
+| T02 | MongoDB Models (8 schemas) | Ritam | ✅ Complete | All models tested against Atlas |
 | T03 | Auth backend (Register, Login, JWT) | Ritam | ⬜ Pending | — |
 | T04 | Auth frontend (Login, Register pages) | Rudranil | ⬜ Pending | — |
 | T05 | Dashboard layout and navigation | Rudranil | ⬜ Pending | — |

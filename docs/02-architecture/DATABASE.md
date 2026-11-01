@@ -17,14 +17,14 @@
 
 | Collection | Model File | Status |
 |---|---|---|
-| users | `User.js` | ⬜ Task 2 — Not yet written |
-| socialAccounts | `SocialAccount.js` | ⬜ Task 2 — Not yet written |
-| posts | `Post.js` | ⬜ Task 2 — Not yet written |
-| postTargets | `PostTarget.js` | ⬜ Task 2 — Not yet written |
-| scheduleJobs | `ScheduleJob.js` | ⬜ Task 2 — Not yet written |
-| aiGenerations | `AIGeneration.js` | ⬜ Task 2 — Not yet written |
-| analyticsSnapshots | `AnalyticsSnapshot.js` | ⬜ Task 2 — Not yet written |
-| auditLogs | `AuditLog.js` | ⬜ Task 2 — Not yet written |
+| users | `User.js` | ✅ Task 2 — Complete |
+| socialAccounts | `SocialAccount.js` | ✅ Task 2 — Complete |
+| posts | `Post.js` | ✅ Task 2 — Complete |
+| postTargets | `PostTarget.js` | ✅ Task 2 — Complete |
+| scheduleJobs | `ScheduleJob.js` | ✅ Task 2 — Complete |
+| aiGenerations | `AIGeneration.js` | ✅ Task 2 — Complete |
+| analyticsSnapshots | `AnalyticsSnapshot.js` | ✅ Task 2 — Complete |
+| auditLogs | `AuditLog.js` | ✅ Task 2 — Complete |
 
 ---
 

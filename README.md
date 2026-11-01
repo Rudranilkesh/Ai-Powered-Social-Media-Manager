@@ -154,8 +154,8 @@ VITE_API_BASE_URL=/api/v1
 | Task | Description | Status |
 |---|---|---|
 | T01 | Project setup + boilerplate | ✅ Complete |
-| T02 | MongoDB Models | 🔄 Next |
-| T03 | Authentication backend | ⬜ Pending |
+| T02 | MongoDB Models | ✅ Complete |
+| T03 | Authentication backend | 🔄 Next |
 | T04 | Authentication frontend | ⬜ Pending |
 | T05 | Dashboard UI | ⬜ Pending |
 | T06 | Media upload (Cloudinary) | ⬜ Pending |

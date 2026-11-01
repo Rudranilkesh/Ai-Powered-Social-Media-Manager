@@ -12,7 +12,7 @@
 | Task | Description | Owner | Status |
 |---|---|---|---|
 | Task 1 | Project setup, folder structure, boilerplate | Ritam | ✅ Complete |
-| Task 2 | MongoDB Models (all 8 schemas) | Ritam | 🔄 Next |
+| Task 2 | MongoDB Models (all 8 schemas) | Ritam | ✅ Complete |
 | Task 3 | Authentication backend (Register, Login, JWT) | Ritam | ⬜ Pending |
 | Task 4 | Authentication frontend (Login, Register pages) | Rudranil | ⬜ Pending |
 
