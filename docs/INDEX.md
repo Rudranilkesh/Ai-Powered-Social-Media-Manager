@@ -19,8 +19,8 @@ Complete documentation for the AI-Powered Social Media Automation Platform.
 |---|---|---|
 | [ARCHITECTURE.md](./02-architecture/ARCHITECTURE.md) | System architecture overview | ✅ Active |
 | [DATA_FLOW.md](./02-architecture/DATA_FLOW.md) | DFD Level 0 and Level 1 | 📄 Available in DOCX |
-| [DATABASE.md](./02-architecture/DATABASE.md) | MongoDB schemas and relationships | 🔄 Updates with Task 2 |
-| [API_DOCUMENTATION.md](./02-architecture/API_DOCUMENTATION.md) | All REST API endpoints | 🔄 Updates with Task 3 |
+| [DATABASE.md](./02-architecture/DATABASE.md) | MongoDB schemas and relationships | ✅ Complete (Task 2) |
+| [API_DOCUMENTATION.md](./02-architecture/API_DOCUMENTATION.md) | All REST API endpoints | ✅ Updated with Auth (Task 3) |
 | [INTEGRATIONS.md](./02-architecture/INTEGRATIONS.md) | External service integrations | 🔄 Pending |
 
 ### 03 — Development
@@ -74,4 +74,4 @@ All original Word documents are preserved in `/docs/`:
 
 ---
 
-*Last updated: Task 1 complete — Boilerplate setup done*
+*Last updated: Tasks 1-4 complete — Authentication Frontend verified*

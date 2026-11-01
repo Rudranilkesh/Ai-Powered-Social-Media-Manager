@@ -17,8 +17,8 @@
 | T01 | Project setup, folder structure, boilerplate | Ritam | ✅ Complete | npm install done, GitHub pushed |
 | T02 | MongoDB Models (8 schemas) | Ritam | ✅ Complete | All models tested against Atlas |
 | T03 | Auth backend (Register, Login, JWT) | Ritam | ✅ Complete | All 3 endpoints tested, AuditLog integrated |
-| T04 | Auth frontend (Login, Register pages) | Rudranil | 🔄 Next | — |
-| T05 | Dashboard layout and navigation | Rudranil | ⬜ Pending | — |
+| T04 | Auth frontend (Login, Register pages) | Rudranil | ✅ Complete | AuthContext, pages, validation, route guards |
+| T05 | Dashboard layout and navigation | Rudranil | 🔄 Next | — |
 | T06 | Cloudinary media upload | Rudranil | ⬜ Pending | — |
 | T07 | AI content generation backend | Rudranil | ⬜ Pending | Gemini API |
 | T08 | AI content generator UI | Rudranil | ⬜ Pending | — |

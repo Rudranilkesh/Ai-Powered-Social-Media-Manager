@@ -8,7 +8,7 @@
 
 | ID | Module | Owner | Status |
 |---|---|---|---|
-| M01 | Authentication & Profile | Ritam | ⬜ Pending (Task 3) |
+| M01 | Authentication & Profile | Ritam & Rudranil | ✅ Complete (Tasks 3 & 4) |
 | M02 | Social Account Connection | Sagnik | ⬜ Pending (Task 10) |
 | M03 | AI Content Generation | Rudranil | ⬜ Pending (Task 7) |
 | M04 | Post & Media Management | Sagnik | ⬜ Pending (Task 9) |
@@ -23,7 +23,9 @@
 - **Controller:** `authController.js`
 - **Model:** `User.js`
 - **Middleware:** `authMiddleware.js`
-- **Status:** ⬜ Pending
+- **Frontend Pages:** `LoginPage.jsx`, `RegisterPage.jsx`
+- **Frontend Context:** `AuthContext.jsx`, `authService.js`
+- **Status:** ✅ Complete (Backend Task 3 & Frontend Task 4)
 
 ## M02 — Social Account Connection
 - **Endpoints:** `GET /connections`, `POST /connections/start`, `DELETE /connections/:id`

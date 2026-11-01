@@ -5,6 +5,24 @@ Format: `[version] — date — description`
 
 ---
 
+## [0.4.0] — 2026-11-01 — Authentication Frontend (Task T04)
+
+### Added
+- `frontend/src/services/authService.js` — Axios wrapper service for `register`, `login`, `getMe`, and `logout` operations.
+- `frontend/src/context/AuthContext.jsx` — Global authentication context & provider with session restore (`getMe` on mount), `localStorage` JWT synchronization, and `useAuth` hook.
+- `frontend/src/components/auth/ProtectedRoute.jsx` — Route guard redirecting unauthenticated users to `/login` with return location state and accessible loading status.
+- `frontend/src/components/auth/PublicRoute.jsx` — Route guard redirecting authenticated users away from `/login` and `/register` to `/dashboard`.
+- `frontend/src/pages/auth/LoginPage.jsx` — Login form with client validation, server error alerts, password show/hide toggle, loading spinner, and signup link.
+- `frontend/src/pages/auth/RegisterPage.jsx` — Registration form with client validation matching backend rules (name max 100, valid email, password with min 8 chars, uppercase, number, password confirmation), password criteria checklist, server error alerts, and login link.
+- `frontend/src/pages/dashboard/DashboardPage.jsx` — Initial authenticated dashboard showing active user profile, session details, and logout action.
+- `frontend/public/favicon.svg` — Brand SVG favicon.
+- `backend/.env.example` & `frontend/.env.example` — Sanitized environment configuration templates.
+
+### Changed
+- `frontend/src/App.jsx` — Integrated `<AuthProvider>` and defined application routes (`/login`, `/register`, `/dashboard`, `/`, with catch-all redirect).
+
+---
+
 ## [0.3.0] — 2026-11-01 — Authentication Backend
 
 ### Added
