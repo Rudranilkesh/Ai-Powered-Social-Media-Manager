@@ -5,7 +5,33 @@ Format: `[version] — date — description`
 
 ---
 
-## [0.1.0] — 2026-11-01 — Initial Setup
+## [0.3.0] — 2026-11-01 — Authentication Backend
+
+### Added
+- `src/utils/tokenUtils.js` — JWT token generation utility (`generateToken`)
+- `src/validators/authValidator.js` — Input validation for register and login using express-validator
+- `src/controllers/authController.js` — Register, login, getMe controllers with AuditLog integration
+- `src/routes/authRoutes.js` — Auth route definitions
+- `app.js` updated — auth routes registered at `/api/v1/auth`
+
+### Implemented Endpoints
+- `POST /api/v1/auth/register` — Creates user, hashes password, returns JWT
+- `POST /api/v1/auth/login` — Verifies credentials, returns JWT
+- `GET /api/v1/auth/me` — Returns authenticated user profile (protected)
+
+### Security
+- Password never returned in any response
+- Generic error message for invalid login (no email enumeration)
+- isActive check before issuing token
+- AuditLog entries for register and login events
+- Passwords and tokens never stored in AuditLog
+
+### Tests
+- 7 test cases run and passed against live MongoDB Atlas
+
+---
+
+
 
 ### Added
 - Full project folder structure (frontend + backend + docs)

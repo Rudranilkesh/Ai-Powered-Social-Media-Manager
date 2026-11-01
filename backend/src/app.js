@@ -9,7 +9,7 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 
 // ── Route imports (uncomment each as the module is built) ──
-// import authRoutes       from "./routes/authRoutes.js";
+import authRoutes       from "./routes/authRoutes.js";
 // import userRoutes       from "./routes/userRoutes.js";
 // import postRoutes       from "./routes/postRoutes.js";
 // import aiRoutes         from "./routes/aiRoutes.js";
@@ -57,7 +57,7 @@ export function createApp() {
   });
 
   // ── API routes (uncomment as each module is implemented) ──
-  // app.use("/api/v1/auth",       authRoutes);
+  app.use("/api/v1/auth",        authRoutes);
   // app.use("/api/v1/users",      userRoutes);
   // app.use("/api/v1/posts",      postRoutes);
   // app.use("/api/v1/ai",         aiRoutes);
